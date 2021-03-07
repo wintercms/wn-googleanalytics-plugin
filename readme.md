@@ -1,6 +1,6 @@
 # Google Analytics integration plugin
 
-This plugin adds Google Analytics tracking and reporting features to the [OctoberCMS](http://octobercms.com).
+This plugin adds Google Analytics tracking and reporting features to the [Winter CMS](https://wintercms.com).
 
 ## Configuration
 
@@ -22,7 +22,7 @@ In either case, you should end up on the **Credentials** page and can create you
 
 1. Click **Create service account**.
 
-1. In the **Create service account** window, type a name for the service account, eg: `OctoberCMS Analytics`.
+1. In the **Create service account** window, type a name for the service account, eg: `Winter CMS Analytics`.
 
 1. Place a tick in the box  **Furnish a new private key** and select **JSON** for the **Key type**.
 
@@ -44,9 +44,9 @@ In either case, you should end up on the **Credentials** page and can create you
 
 1. Click the **Admin** main menu tab again and select **View > View Settings** from the menu. *Copy to your clipboard* the Profile ID (should be a number).
 
-### Configure October back-end area
+### Configure Winter CMS back-end area
 
-1. Open your October back-end administration area and open **Settings > Google Analytics**.
+1. Open your Winter CMS back-end administration area and open **Settings > Google Analytics**.
 
 1. *Paste the Account ID from the clipboard* in to the field **Analytics View/Profile ID number**.
 
@@ -84,4 +84,4 @@ To add the plugin's tracking code to your website just drop the Google Analytics
 
 ### Popup message simply saying "error" when trying to add the JSON key file.
 
-Some ad-blockers (such as Chrome's uBlock Origin extension or Firefox's own built-in algorithms) may prevent the uploading of the JSON file key. Disabling these, or whitelisting the October CMS website, may resolve this issue for you.
+Some ad-blockers (such as Chrome's uBlock Origin extension or Firefox's own built-in algorithms) may prevent the uploading of the JSON file key. Disabling these, or whitelisting the Winter CMS website, may resolve this issue for you.

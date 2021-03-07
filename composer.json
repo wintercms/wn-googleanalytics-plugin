@@ -1,9 +1,9 @@
 {
-    "name": "rainlab/googleanalytics",
-    "type": "october-plugin",
-    "description": "Google Analytics integration plugin for OctoberCMS",
-    "homepage": "http://octobercms.com",
-    "keywords": ["october", "cms", "rainlab", "google", "analytics"],
+    "name": "winter/googleanalytics",
+    "type": "winter-plugin",
+    "description": "Google Analytics integration plugin for Winter CMS",
+    "homepage": "https://github.com/wintercms/wn-googleanalytics-plugin",
+    "keywords": ["cms", "wintercms", "google", "analytics"],
     "authors": [
         {
             "name": "Alexey Bobkov",

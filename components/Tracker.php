@@ -1,15 +1,15 @@
-<?php namespace RainLab\GoogleAnalytics\Components;
+<?php namespace Winter\GoogleAnalytics\Components;
 
 use Cms\Classes\ComponentBase;
-use RainLab\GoogleAnalytics\Models\Settings;
+use Winter\GoogleAnalytics\Models\Settings;
 
 class Tracker extends ComponentBase
 {
     public function componentDetails()
     {
         return [
-            'name'        => 'rainlab.googleanalytics::lang.strings.tracker',
-            'description' => 'rainlab.googleanalytics::lang.strings.tracker_desc'
+            'name'        => 'winter.googleanalytics::lang.strings.tracker',
+            'description' => 'winter.googleanalytics::lang.strings.tracker_desc'
         ];
     }
 

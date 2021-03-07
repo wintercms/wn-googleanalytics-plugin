@@ -1,7 +1,7 @@
-<?php namespace RainLab\GoogleAnalytics\ReportWidgets;
+<?php namespace Winter\GoogleAnalytics\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
-use RainLab\GoogleAnalytics\Classes\Analytics;
+use Winter\GoogleAnalytics\Classes\Analytics;
 use ApplicationException;
 use Exception;
 
@@ -33,24 +33,24 @@ class TrafficGoal extends ReportWidgetBase
         return [
             'title' => [
                 'title'             => 'backend::lang.dashboard.widget_title_label',
-                'default'           => e(trans('rainlab.googleanalytics::lang.widgets.title_traffic_goal')),
+                'default'           => e(trans('winter.googleanalytics::lang.widgets.title_traffic_goal')),
                 'type'              => 'string',
                 'validationPattern' => '^.+$',
                 'validationMessage' => 'backend::lang.dashboard.widget_title_error'
             ],
             'days' => [
-                'title'             => 'rainlab.googleanalytics::lang.widgets.traffic_goal_days',
+                'title'             => 'winter.googleanalytics::lang.widgets.traffic_goal_days',
                 'default'           => '7',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$'
             ],
             'goal' => [
-                'title'             => 'rainlab.googleanalytics::lang.widgets.traffic_goal_goal',
-                'description'       => 'rainlab.googleanalytics::lang.widgets.traffic_goal_goal_description',
+                'title'             => 'winter.googleanalytics::lang.widgets.traffic_goal_goal',
+                'description'       => 'winter.googleanalytics::lang.widgets.traffic_goal_goal_description',
                 'default'           => '100',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'rainlab.googleanalytics::lang.widgets.traffic_goal_goal_validation'
+                'validationMessage' => 'winter.googleanalytics::lang.widgets.traffic_goal_goal_validation'
             ]
         ];
     }

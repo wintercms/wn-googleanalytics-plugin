@@ -1,4 +1,4 @@
-<?php namespace RainLab\GoogleAnalytics\Classes;
+<?php namespace Winter\GoogleAnalytics\Classes;
 
 use App;
 use Config;
@@ -7,11 +7,11 @@ use Google_Cache_File;
 use Google_Service_Analytics;
 use Google_Auth_AssertionCredentials;
 use ApplicationException;
-use RainLab\GoogleAnalytics\Models\Settings;
+use Winter\GoogleAnalytics\Models\Settings;
 
 class Analytics
 {
-    use \October\Rain\Support\Traits\Singleton;
+    use \Winter\Storm\Support\Traits\Singleton;
 
     /**
      * @var Google_Client Google API client
@@ -32,11 +32,11 @@ class Analytics
     {
         $settings = Settings::instance();
         if (!strlen($settings->profile_id)) {
-            throw new ApplicationException(trans('rainlab.googleanalytics::lang.strings.notconfigured'));
+            throw new ApplicationException(trans('winter.googleanalytics::lang.strings.notconfigured'));
         }
 
         if (!$settings->gapi_key) {
-            throw new ApplicationException(trans('rainlab.googleanalytics::lang.strings.keynotuploaded'));
+            throw new ApplicationException(trans('winter.googleanalytics::lang.strings.keynotuploaded'));
         }
 
         $client = new Google_Client();
