@@ -11,7 +11,8 @@ class Plugin extends PluginBase
             'description' => 'winter.googleanalytics::lang.strings.plugin_desc',
             'author'      => 'Alexey Bobkov, Samuel Georges',
             'icon'        => 'icon-bar-chart-o',
-            'homepage'    => 'https://github.com/wintercms/wn-googleanalytics-plugin'
+            'homepage'    => 'https://github.com/wintercms/wn-googleanalytics-plugin',
+            'replaces'    => 'RainLab.GoogleAnalytics'
         ];
     }
 
