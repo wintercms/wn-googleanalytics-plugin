@@ -1,7 +1,7 @@
 <?php
 /**
- * To allow compatibility with plugins that extend the original RainLab.User plugin, this will alias those classes to
- * use the new Winter.User classes.
+ * To allow compatibility with plugins that extend the original RainLab.GoogleAnalytics plugin, this will alias those classes to
+ * use the new Winter.GoogleAnalytics classes.
  */
 $aliases = [
     // Regular aliases
