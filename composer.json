@@ -18,5 +18,8 @@
         "php": ">=7.0",
         "guzzlehttp/guzzle": "~6.0",
         "google/apiclient": "^2.4"
+    },
+    "extra": {
+        "installer-name": "googleanalytics"
     }
 }
