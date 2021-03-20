@@ -1,7 +1,7 @@
-<?php namespace RainLab\GoogleAnalytics\ReportWidgets;
+<?php namespace Winter\GoogleAnalytics\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
-use RainLab\GoogleAnalytics\Classes\Analytics;
+use Winter\GoogleAnalytics\Classes\Analytics;
 use ApplicationException;
 use Exception;
 
@@ -33,31 +33,31 @@ class Browsers extends ReportWidgetBase
         return [
             'title' => [
                 'title'             => 'backend::lang.dashboard.widget_title_label',
-                'default'           => e(trans('rainlab.googleanalytics::lang.widgets.title_browsers')),
+                'default'           => e(trans('winter.googleanalytics::lang.widgets.title_browsers')),
                 'type'              => 'string',
                 'validationPattern' => '^.+$',
                 'validationMessage' => 'backend::lang.dashboard.widget_title_error'
             ],
             'reportHeight' => [
-                'title'             => 'rainlab.googleanalytics::lang.widgets.browsers_report_height',
+                'title'             => 'winter.googleanalytics::lang.widgets.browsers_report_height',
                 'default'           => '200',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'rainlab.googleanalytics::lang.widgets.browsers_report_height_validation'
+                'validationMessage' => 'winter.googleanalytics::lang.widgets.browsers_report_height_validation'
             ],
             'legendAsTable' => [
-                'title'             => 'rainlab.googleanalytics::lang.widgets.legend_as_table',
+                'title'             => 'winter.googleanalytics::lang.widgets.legend_as_table',
                 'type'              => 'checkbox',
                 'default'           => 1
             ],
             'days' => [
-                'title'             => 'rainlab.googleanalytics::lang.widgets.days',
+                'title'             => 'winter.googleanalytics::lang.widgets.days',
                 'default'           => '7',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$'
             ],
             'displayDescription' => [
-                'title'             => 'rainlab.googleanalytics::lang.widgets.display_description',
+                'title'             => 'winter.googleanalytics::lang.widgets.display_description',
                 'type'              => 'checkbox',
                 'default'           => 1
             ]

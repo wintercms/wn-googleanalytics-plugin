@@ -1,4 +1,4 @@
-<?php namespace RainLab\GoogleAnalytics;
+<?php namespace Winter\GoogleAnalytics;
 
 use System\Classes\PluginBase;
 
@@ -8,30 +8,31 @@ class Plugin extends PluginBase
     {
         return [
             'name'        => 'Google Analytics',
-            'description' => 'rainlab.googleanalytics::lang.strings.plugin_desc',
+            'description' => 'winter.googleanalytics::lang.strings.plugin_desc',
             'author'      => 'Alexey Bobkov, Samuel Georges',
             'icon'        => 'icon-bar-chart-o',
-            'homepage'    => 'https://github.com/rainlab/googleanalytics-plugin'
+            'homepage'    => 'https://github.com/wintercms/wn-googleanalytics-plugin',
+            'replaces'    => 'RainLab.GoogleAnalytics'
         ];
     }
 
     public function registerComponents()
     {
         return [
-            '\RainLab\GoogleAnalytics\Components\Tracker' => 'googleTracker'
+            '\Winter\GoogleAnalytics\Components\Tracker' => 'googleTracker'
         ];
     }
 
     public function registerPermissions()
     {
         return [
-            'rainlab.googleanalytics.access_settings' => [
-                'tab'   => 'rainlab.googleanalytics::lang.permissions.tab',
-                'label' => 'rainlab.googleanalytics::lang.permissions.settings'
+            'winter.googleanalytics.access_settings' => [
+                'tab'   => 'winter.googleanalytics::lang.permissions.tab',
+                'label' => 'winter.googleanalytics::lang.permissions.settings'
             ],
-            'rainlab.googleanalytics.view_widgets' => [
-                'tab'   => 'rainlab.googleanalytics::lang.permissions.tab',
-                'label' => 'rainlab.googleanalytics::lang.permissions.widgets'
+            'winter.googleanalytics.view_widgets' => [
+                'tab'   => 'winter.googleanalytics::lang.permissions.tab',
+                'label' => 'winter.googleanalytics::lang.permissions.widgets'
             ]
         ];
     }
@@ -39,30 +40,30 @@ class Plugin extends PluginBase
     public function registerReportWidgets()
     {
         return [
-            'RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
+            'Winter\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
                 'label'       => 'Google Analytics traffic overview',
                 'context'     => 'dashboard',
-                'permissions' => ['rainlab.googleanalytics.view_widgets']
+                'permissions' => ['winter.googleanalytics.view_widgets']
             ],
-            'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources' => [
+            'Winter\GoogleAnalytics\ReportWidgets\TrafficSources' => [
                 'label'       => 'Google Analytics traffic sources',
                 'context'     => 'dashboard',
-                'permissions' => ['rainlab.googleanalytics.view_widgets']
+                'permissions' => ['winter.googleanalytics.view_widgets']
             ],
-            'RainLab\GoogleAnalytics\ReportWidgets\Browsers' => [
+            'Winter\GoogleAnalytics\ReportWidgets\Browsers' => [
                 'label'       => 'Google Analytics browsers',
                 'context'     => 'dashboard',
-                'permissions' => ['rainlab.googleanalytics.view_widgets']
+                'permissions' => ['winter.googleanalytics.view_widgets']
             ],
-            'RainLab\GoogleAnalytics\ReportWidgets\TrafficGoal' => [
+            'Winter\GoogleAnalytics\ReportWidgets\TrafficGoal' => [
                 'label'       => 'Google Analytics traffic goal',
                 'context'     => 'dashboard',
-                'permissions' => ['rainlab.googleanalytics.view_widgets']
+                'permissions' => ['winter.googleanalytics.view_widgets']
             ],
-            'RainLab\GoogleAnalytics\ReportWidgets\TopPages' => [
+            'Winter\GoogleAnalytics\ReportWidgets\TopPages' => [
                 'label'       => 'Google Analytics top pages',
                 'context'     => 'dashboard',
-                'permissions' => ['rainlab.googleanalytics.view_widgets']
+                'permissions' => ['winter.googleanalytics.view_widgets']
             ]
         ];
     }
@@ -73,9 +74,9 @@ class Plugin extends PluginBase
             'config' => [
                 'label'       => 'Google Analytics',
                 'icon'        => 'icon-bar-chart-o',
-                'description' => 'rainlab.googleanalytics::lang.strings.settings_desc',
-                'class'       => 'RainLab\GoogleAnalytics\Models\Settings',
-                'permissions' => ['rainlab.googleanalytics.access_settings'],
+                'description' => 'winter.googleanalytics::lang.strings.settings_desc',
+                'class'       => 'Winter\GoogleAnalytics\Models\Settings',
+                'permissions' => ['winter.googleanalytics.access_settings'],
                 'order'       => 600
             ]
         ];

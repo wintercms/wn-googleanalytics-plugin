@@ -1,7 +1,7 @@
-<?php namespace RainLab\GoogleAnalytics\ReportWidgets;
+<?php namespace Winter\GoogleAnalytics\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
-use RainLab\GoogleAnalytics\Classes\Analytics;
+use Winter\GoogleAnalytics\Classes\Analytics;
 use ApplicationException;
 use Exception;
 
@@ -33,13 +33,13 @@ class TrafficOverview extends ReportWidgetBase
         return [
             'title' => [
                 'title'             => 'backend::lang.dashboard.widget_title_label',
-                'default'           => e(trans('rainlab.googleanalytics::lang.widgets.title_traffic_overview')),
+                'default'           => e(trans('winter.googleanalytics::lang.widgets.title_traffic_overview')),
                 'type'              => 'string',
                 'validationPattern' => '^.+$',
                 'validationMessage' => 'backend::lang.dashboard.widget_title_error'
             ],
             'days' => [
-                'title'             => 'rainlab.googleanalytics::lang.widgets.days',
+                'title'             => 'winter.googleanalytics::lang.widgets.days',
                 'default'           => '30',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$'
