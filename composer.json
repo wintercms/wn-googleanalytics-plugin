@@ -1,21 +1,35 @@
 {
-    "name": "winter/googleanalytics",
+    "name": "winter/wn-googleanalytics-plugin",
     "type": "winter-plugin",
     "description": "Google Analytics integration plugin for Winter CMS",
     "homepage": "https://github.com/wintercms/wn-googleanalytics-plugin",
     "keywords": ["cms", "wintercms", "google", "analytics"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Alexey Bobkov",
-            "email": "aleksey.bobkov@gmail.com"
+            "email": "aleksey.bobkov@gmail.com",
+            "role": "Original Author"
         },
         {
             "name": "Samuel Georges",
-            "email": "daftspunky@gmail.com"
+            "email": "daftspunky@gmail.com",
+            "role": "Original Author"
+        },
+        {
+            "name": "Winter CMS Maintainers",
+            "homepage": "https://wintercms.com",
+            "role": "Maintainer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/wintercms/wn-googleanalytics-plugin/issues",
+        "discord": "https://discord.gg/D5MFSPH6Ux",
+        "source": "https://github.com/wintercms/wn-googleanalytics-plugin"
+    },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.2",
+        "composer/installers": "~1.0",
         "guzzlehttp/guzzle": "~6.0",
         "google/apiclient": "^2.4"
     },
