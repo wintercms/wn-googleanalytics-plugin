@@ -9,7 +9,7 @@ class Plugin extends PluginBase
         return [
             'name'        => 'Google Analytics',
             'description' => 'winter.googleanalytics::lang.strings.plugin_desc',
-            'author'      => 'Alexey Bobkov, Samuel Georges',
+            'author'      => 'Winter CMS',
             'icon'        => 'icon-bar-chart-o',
             'homepage'    => 'https://github.com/wintercms/wn-googleanalytics-plugin',
             'replaces'    => 'RainLab.GoogleAnalytics'
