@@ -12,7 +12,7 @@ class Plugin extends PluginBase
             'author'      => 'Winter CMS',
             'icon'        => 'icon-bar-chart-o',
             'homepage'    => 'https://github.com/wintercms/wn-googleanalytics-plugin',
-            'replaces'    => 'RainLab.GoogleAnalytics'
+            'replaces'    => ['RainLab.GoogleAnalytics' => '<= 1.3.0'],
         ];
     }
 
