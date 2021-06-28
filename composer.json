@@ -30,7 +30,7 @@
     "require": {
         "php": ">=7.2",
         "composer/installers": "~1.0",
-        "guzzlehttp/guzzle": "~6.0",
+        "guzzlehttp/guzzle": "^7.0",
         "google/apiclient": "^2.4"
     },
     "extra": {
