@@ -33,6 +33,9 @@
         "composer/installers": "~1.0",
         "google/apiclient": "^2.4"
     },
+    "replace": {
+        "rainlab/googleanalytics-plugin": "~1.2"
+    },
     "extra": {
         "installer-name": "googleanalytics"
     }
