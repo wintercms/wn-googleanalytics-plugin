@@ -18,4 +18,3 @@
   - "Rebrand to Winter.GoogleAnalytics"
   - v2.0.0/convert_data.php
 "2.0.1": "update guzzle dependency to >=6.0"
-"2.0.2": "allow guzzle dependency 7.0+"
