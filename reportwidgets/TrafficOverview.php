@@ -4,12 +4,14 @@ use Lang;
 use Exception;
 use ApplicationException;
 use Backend\Classes\ReportWidgetBase;
-use Winter\GoogleAnalytics\Classes\Analytics;
-use Winter\Storm\Argon\Argon;
 use Google\Service\AnalyticsData\DateRange;
 use Google\Service\AnalyticsData\Dimension;
+use Google\Service\AnalyticsData\DimensionOrderBy;
 use Google\Service\AnalyticsData\Metric;
+use Google\Service\AnalyticsData\OrderBy;
 use Google\Service\AnalyticsData\RunReportRequest;
+use Winter\GoogleAnalytics\Classes\Analytics;
+use Winter\Storm\Argon\Argon;
 
 /**
  * Google Analytics traffic overview widget.
@@ -64,7 +66,7 @@ class TrafficOverview extends ReportWidgetBase
 
     protected function loadData()
     {
-        $obj = Analytics::instance();
+        $analytics = Analytics::instance();
 
         $days = $this->property('days', 30);
         $metrics = $this->property('metrics', ['sessions']);
@@ -86,9 +88,17 @@ class TrafficOverview extends ReportWidgetBase
                 'endDate' => $now->format('Y-m-d')
             ])
         ]);
+        $request->setOrderBys([
+            new OrderBy([
+                'desc' => false,
+                'dimension' => new DimensionOrderBy([
+                    'dimensionName' => 'date'
+                ])
+            ])
+        ]);
 
-        $data = $obj->service->properties->runReport(
-            $obj->viewId,
+        $data = $analytics->service->properties->runReport(
+            $analytics->viewId,
             $request,
         );
 
@@ -113,11 +123,6 @@ class TrafficOverview extends ReportWidgetBase
                     $row->getMetricValues()[$index]->getValue(),
                 ];
             }
-        }
-
-        // Sort results by date, since Google seems to return them in a random order
-        foreach (array_keys($metrics) as $index) {
-            array_multisort(array_column($points[$index], 0), SORT_ASC, $points[$index]);
         }
 
         $this->vars['metrics'] = $this->property('metrics', ['sessions']);
