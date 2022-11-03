@@ -11,7 +11,7 @@
             <ul>
             <?php if ($rows && count($rows)): ?>
                 <?php foreach ($rows as $row): ?>
-                    <li><?= e($row[0]) ?> <span><?= $row[1] ?></span></li>
+                    <li><?= e($row->getDimensionValues()[0]->getValue()) ?> <span><?= $row->getMetricValues()[0]->getValue() ?></span></li>
                 <?php endforeach ?>
             <?php endif; ?>
             </ul>

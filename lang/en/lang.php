@@ -28,6 +28,8 @@ return [
         'metric_sessions' => 'Sessions',
         'metric_activeUsers' => 'Users',
         'metric_screenPageViews' => 'Page views',
+        'device_split' => 'Split by device',
+        'device_split_description' => 'If ticked, visits will also be split by device type, such as desktop, mobile or tablet.',
     ],
     'permissions' => [
         'tab'      => 'Google Analytics Plugin',
