@@ -71,4 +71,11 @@ return [
         'force_ssl'            => 'Force SSL',
         'force_ssl_comment'    => 'Always use SSL to send data to Google',
     ],
+    'mediums' => [
+        'organic' => 'Search engines',
+        'cpc' => 'Paid search click-throughs',
+        'direct' => 'Direct traffic',
+        'referral' => 'External sites',
+        'unknown' => 'Unknown',
+    ],
 ];
