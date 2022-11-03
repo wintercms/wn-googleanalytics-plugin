@@ -9,11 +9,13 @@
                 "
             data-control="chart-pie"
             data-size="<?= $this->property('reportSize') ?>"
-            data-center-text="<?= $total ?>"
         >
             <ul>
                 <?php foreach ($rows as $row): ?>
-                    <li><?= e($row[0]) ?> <span><?= $row[1] ?></span></li>
+                    <li>
+                        <?= e($mediumMap[$row->getDimensionValues()[0]->getValue()] ?? $row->getDimensionValues()[0]->getValue()) ?>
+                        <span><?= $row->getMetricValues()[0]->getValue() ?></span>
+                    </li>
                 <?php endforeach ?>
             </ul>
         </div>
