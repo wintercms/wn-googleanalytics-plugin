@@ -1,11 +1,9 @@
 <?php namespace Winter\GoogleAnalytics\ReportWidgets;
 
 use Exception;
-use ApplicationException;
 use Backend\Classes\ReportWidgetBase;
 use Google\Service\AnalyticsData\DateRange;
 use Google\Service\AnalyticsData\Dimension;
-use Google\Service\AnalyticsData\DimensionOrderBy;
 use Google\Service\AnalyticsData\Metric;
 use Google\Service\AnalyticsData\MetricOrderBy;
 use Google\Service\AnalyticsData\OrderBy;
@@ -47,7 +45,7 @@ class TopPages extends ReportWidgetBase
             ],
             'days' => [
                 'title'             => 'winter.googleanalytics::lang.widgets.days',
-                'default'           => '7',
+                'default'           => '30',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$'
             ],
@@ -65,7 +63,6 @@ class TopPages extends ReportWidgetBase
         $analytics = Analytics::instance();
 
         $days = $this->property('days', 30);
-        $metrics = $this->property('metrics', ['sessions']);
 
         // Formulate data request
         $request = new RunReportRequest();
