@@ -16,7 +16,7 @@ return [
         'traffic_goal_goal_validation' => 'Please specify the traffic goal as an integer value.',
         'title_traffic_overview' => 'Traffic overview',
         'title_traffic_sources' => 'Traffic Sources',
-        'description_traffic_sources' => 'The traffic sources report displays the source of referrals to your website.',
+        'description_traffic_sources' => 'The traffic sources report displays the source from where visitors entered the site.',
         'traffic_sources_report_size' => 'Chart radius',
         'traffic_sources_report_size_validation' => 'Please specify the chart size as an integer value',
         'traffic_sources_center' => 'Center the chart',
