@@ -1,12 +1,9 @@
 <?php namespace Winter\GoogleAnalytics\Classes;
 
 use App;
-use Config;
-use Google_Client;
-use Google_Cache_File;
-use Google_Service_Analytics;
-use Google_Auth_AssertionCredentials;
 use ApplicationException;
+use Google\Client;
+use Google\Service\AnalyticsData;
 use Winter\GoogleAnalytics\Models\Settings;
 
 class Analytics
@@ -14,12 +11,12 @@ class Analytics
     use \Winter\Storm\Support\Traits\Singleton;
 
     /**
-     * @var Google_Client Google API client
+     * @var \Google\Client Google API client
      */
     public $client;
 
     /**
-     * @var Google_Service_Analytics Google API analytics service
+     * @var \Google\Service\AnalyticsData Google API analytics service
      */
     public $service;
 
@@ -39,7 +36,7 @@ class Analytics
             throw new ApplicationException(trans('winter.googleanalytics::lang.strings.keynotuploaded'));
         }
 
-        $client = new Google_Client();
+        $client = new Client();
 
         /*
          * Set caching
@@ -52,14 +49,14 @@ class Analytics
          */
         $auth = json_decode($settings->gapi_key->getContents(), true);
         $client->setAuthConfig($auth);
-        $client->addScope(Google_Service_Analytics::ANALYTICS_READONLY);
+        $client->addScope(AnalyticsData::ANALYTICS_READONLY);
 
         if ($client->isAccessTokenExpired()) {
-            $client->refreshTokenWithAssertion();
+            $client->fetchAccessTokenWithAssertion();
         }
 
         $this->client = $client;
-        $this->service = new Google_Service_Analytics($client);
-        $this->viewId = 'ga:'.$settings->profile_id;
+        $this->service = new AnalyticsData($client);
+        $this->viewId = 'properties/' . $settings->profile_id;
     }
 }

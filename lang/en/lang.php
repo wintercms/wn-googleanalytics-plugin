@@ -24,6 +24,10 @@ return [
         'display_description' => 'Display the report description',
         'days' => 'Number of days to display data for',
         'legend_as_table' => 'Display legend as a table',
+        'metrics' => 'Metrics',
+        'metric_sessions' => 'Sessions',
+        'metric_activeUsers' => 'Users',
+        'metric_screenPageViews' => 'Page views',
     ],
     'permissions' => [
         'tab'      => 'Google Analytics Plugin',
