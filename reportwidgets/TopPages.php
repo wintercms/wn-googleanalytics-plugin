@@ -1,9 +1,17 @@
 <?php namespace Winter\GoogleAnalytics\ReportWidgets;
 
-use Backend\Classes\ReportWidgetBase;
-use Winter\GoogleAnalytics\Classes\Analytics;
-use ApplicationException;
 use Exception;
+use ApplicationException;
+use Backend\Classes\ReportWidgetBase;
+use Google\Service\AnalyticsData\DateRange;
+use Google\Service\AnalyticsData\Dimension;
+use Google\Service\AnalyticsData\DimensionOrderBy;
+use Google\Service\AnalyticsData\Metric;
+use Google\Service\AnalyticsData\MetricOrderBy;
+use Google\Service\AnalyticsData\OrderBy;
+use Google\Service\AnalyticsData\RunReportRequest;
+use Winter\GoogleAnalytics\Classes\Analytics;
+use Winter\Storm\Argon\Argon;
 
 /**
  * Google Analytics top pages widget.
@@ -20,8 +28,7 @@ class TopPages extends ReportWidgetBase
     {
         try {
             $this->loadData();
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
         }
 
@@ -55,20 +62,49 @@ class TopPages extends ReportWidgetBase
 
     protected function loadData()
     {
-        $days = $this->property('days');
-        if (!$days)
-            throw new ApplicationException('Invalid days value: '.$days);
+        $analytics = Analytics::instance();
 
-        $obj = Analytics::instance();
-        $data = $obj->service->data_ga->get($obj->viewId, $days.'daysAgo', 'today', 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews']);
+        $days = $this->property('days', 30);
+        $metrics = $this->property('metrics', ['sessions']);
 
-        $rows = $data->getRows() ?: [];
-        $rows = $this->vars['rows'] = array_slice($rows, 0, $this->property('number'));
+        // Formulate data request
+        $request = new RunReportRequest();
+        $now = Argon::now()->toImmutable();
+        $request->setDimensions([
+            new Dimension(['name' => 'pagePath']),
+        ]);
+        $request->setMetrics([
+            new Metric(['name' => 'screenPageViews']),
+            new Metric(['name' => 'activeUsers']),
+            new Metric(['name' => 'engagementRate']),
+        ]);
+        $request->setDateRanges([
+            new DateRange([
+                'startDate' => $now->subDays($days)->format('Y-m-d'),
+                'endDate' => $now->format('Y-m-d')
+            ])
+        ]);
+        $request->setOrderBys([
+            new OrderBy([
+                'desc' => true,
+                'metric' => new MetricOrderBy([
+                    'metricName' => 'screenPageViews',
+                ])
+            ]),
+            new OrderBy([
+                'desc' => true,
+                'metric' => new MetricOrderBy([
+                    'metricName' => 'activeUsers',
+                ])
+            ]),
+        ]);
+        $request->setLimit($this->property('number', 5));
 
-        $total = 0;
-        foreach ($rows as $row)
-            $total += $row[1];
+        $data = $analytics->service->properties->runReport(
+            $analytics->viewId,
+            $request,
+        );
 
-        $this->vars['total'] = $total;
+        $this->vars['rows'] = $data->getRows() ?: [];
     }
 }

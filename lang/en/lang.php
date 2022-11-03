@@ -44,8 +44,10 @@ return [
         'settings_desc'  => 'Configure Google Analytics API code and tracking options.',
         'page_url'       => 'Page URL',
         'pageviews'      => 'Pageviews',
+        'users'          => 'Users',
         'current'        => 'Current',
         'goal'           => 'Goal',
+        'engagement'     => 'Engagement',
     ],
     'settings' => [
         'project_name'         => 'Google API Project name',
