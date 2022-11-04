@@ -24,13 +24,22 @@ class TopPages extends ReportWidgetBase
      */
     public function render()
     {
+        $this->addCss('plugins/winter/googleanalytics/assets/css/placeholder.css', 'Winter.GoogleAnalytics');
+
+        return $this->makePartial('widget');
+    }
+
+    public function onLoad()
+    {
         try {
             $this->loadData();
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
         }
 
-        return $this->makePartial('widget');
+        return [
+            '#' . $this->alias => $this->makePartial('report')
+        ];
     }
 
     public function defineProperties()
