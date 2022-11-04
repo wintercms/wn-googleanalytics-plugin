@@ -50,6 +50,8 @@ return [
         'current'        => 'Current',
         'goal'           => 'Goal',
         'engagement'     => 'Engagement',
+        'measurement'    => 'Measurement',
+        'measurement_desc' => 'Add event tracking in your pages.',
     ],
     'settings' => [
         'project_name'         => 'Google API Project name',
@@ -70,6 +72,10 @@ return [
         'domain_name_comment'  => 'Specify the domain name you are going to track',
         'force_ssl'            => 'Force SSL',
         'force_ssl_comment'    => 'Always use SSL to send data to Google',
+        'measurement_id'       => 'Measurement ID',
+        'measurement_id_comment'     => 'You can find the Measurement ID on the Admin / Data Streams page',
+        'measurement_secret'         => 'Measurement Secret',
+        'measurement_secret_comment' => 'You must create a Measurement Protocal API secret and copy the secret into this field.',
     ],
     'mediums' => [
         'organic' => 'Search engines',

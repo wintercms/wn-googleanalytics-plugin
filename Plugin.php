@@ -19,7 +19,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            '\Winter\GoogleAnalytics\Components\Tracker' => 'googleTracker'
+            \Winter\GoogleAnalytics\Components\Tracker::class => 'googleTracker',
+            \Winter\GoogleAnalytics\Components\Measurement::class => 'googleMeasurement',
         ];
     }
 
