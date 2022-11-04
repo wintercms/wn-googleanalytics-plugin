@@ -52,6 +52,8 @@ return [
         'engagement'     => 'Engagement',
         'measurement'    => 'Measurement',
         'measurement_desc' => 'Add event tracking in your pages.',
+        'measurement_view_event' => 'View page event',
+        'measurement_view_event_desc' => 'Defines an event to fire off when the page loads.',
     ],
     'settings' => [
         'project_name'         => 'Google API Project name',

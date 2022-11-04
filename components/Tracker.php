@@ -1,4 +1,6 @@
-<?php namespace Winter\GoogleAnalytics\Components;
+<?php
+
+namespace Winter\GoogleAnalytics\Components;
 
 use Cms\Classes\ComponentBase;
 use Winter\GoogleAnalytics\Models\Settings;
