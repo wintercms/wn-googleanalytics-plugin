@@ -3,14 +3,8 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-{% if __SELF__.domainName %}
-    gtag('set', { 'cookie_domain': '{{ __SELF__.domainName }}' });
-{% endif %}
-{% if __SELF__.forceSSL %}
-    gtag('set', { 'force_ssl': true });
-{% endif %}
-{% if __SELF__.anonymizeIp %}
-    gtag('set', { 'anonymize_ip': true });
-{% endif %}
-    gtag('config', '{{ __SELF__.trackingId }}');
+
+    gtag('config', '{{ __SELF__.trackingId }}', {
+        cookie_domain: '{{ __SELF__.domainName|default('auto') }}',
+    });
 </script>
