@@ -25,7 +25,7 @@ class TrafficSources extends ReportWidgetBase
      */
     public function render()
     {
-        $this->addCss('plugins/winter/googleanalytics/assets/css/placeholder.css', 'Winter.GoogleAnalytics');
+        $this->addCss('/plugins/winter/googleanalytics/assets/css/placeholder.css', 'Winter.GoogleAnalytics');
 
         return $this->makePartial('widget');
     }
