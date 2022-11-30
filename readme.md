@@ -1,8 +1,8 @@
-# Google Analytics V3 integration plugin
+# Google Analytics V4 integration plugin
 
 This plugin adds Google Analytics tracking and reporting features to the [Winter CMS](https://wintercms.com).
 
-> **Note**: This plugin does not support GAv4. If you are having issues creating an account, use the **Show advanced options** link in the GA Account creation and the **Create a Universal Analytics property** switch.
+> **Note**: The v3.x series of this plugin only supports Google Analytics v4 (GA4) as GA3 / UA [are being retired](https://support.google.com/analytics/answer/11583528?hl=en). If you wish to use this plugin for GA3 / UA, you must roll back to v2.0.2 of this plugin.
 
 ## Configuration
 
