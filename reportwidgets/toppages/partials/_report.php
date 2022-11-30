@@ -8,21 +8,25 @@
                     <tr>
                         <th><span><?= e(trans('winter.googleanalytics::lang.strings.page_url')) ?></span></th>
                         <th><span><?= e(trans('winter.googleanalytics::lang.strings.pageviews')) ?></span></th>
-                        <th><span>% <?= e(trans('winter.googleanalytics::lang.strings.pageviews')) ?></span></th>
+                        <th><span><?= e(trans('winter.googleanalytics::lang.strings.users')) ?></span></th>
+                        <th><span>% <?= e(trans('winter.googleanalytics::lang.strings.engagement')) ?></span></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($rows as $row):
-                        $percentage = $total > 0 ? round($row[1]/$total*100, 2) : 0;
-                        $url = $row[0];
+                        $url = $row->getDimensionValues()[0]->getValue();
+                        $views = $row->getMetricValues()[0]->getValue();
+                        $users = $row->getMetricValues()[1]->getValue();
+                        $engagement = round($row->getMetricValues()[2]->getValue() * 100, 2);
                     ?>
                         <tr>
-                            <td><a href="<?= $url ?>" target="_blank"><?= e($row[0]) ?></a></td>
-                            <td><a href="<?= $url ?>" target="_blank"><?= e($row[1]) ?></a></td>
+                            <td><a href="<?= $url ?>" target="_blank"><?= e($url) ?></a></td>
+                            <td><?= e($views) ?></td>
+                            <td><?= e($users) ?></td>
                             <td>
                                 <div class="progress">
-                                    <div class="bar" style="width: <?= $percentage.'%' ?>"></div>
-                                    <a href="<?= $url ?>" target="_blank"><?= $percentage.'%' ?></a>
+                                    <div class="bar" style="width: <?= $engagement . '%' ?>"></div>
+                                    <?= $engagement . '%' ?>
                                 </div>
                             </td>
                         </tr>

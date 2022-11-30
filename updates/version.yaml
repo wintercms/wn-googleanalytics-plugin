@@ -19,3 +19,4 @@
   - v2.0.0/convert_data.php
 "2.0.1": "update guzzle dependency to >=6.0"
 "2.0.2": "allow guzzle dependency 7.0+"
+"3.0.0": "!!! This plugin now only supports Google Analytics v4"

@@ -1,9 +1,16 @@
 <?php namespace Winter\GoogleAnalytics\ReportWidgets;
 
-use Backend\Classes\ReportWidgetBase;
-use Winter\GoogleAnalytics\Classes\Analytics;
-use ApplicationException;
+use Lang;
 use Exception;
+use Backend\Classes\ReportWidgetBase;
+use Google\Service\AnalyticsData\DateRange;
+use Google\Service\AnalyticsData\Dimension;
+use Google\Service\AnalyticsData\Metric;
+use Google\Service\AnalyticsData\MetricOrderBy;
+use Google\Service\AnalyticsData\OrderBy;
+use Google\Service\AnalyticsData\RunReportRequest;
+use Winter\GoogleAnalytics\Classes\Analytics;
+use Winter\Storm\Argon\Argon;
 
 /**
  * Google Analytics traffic sources widget.
@@ -18,14 +25,22 @@ class TrafficSources extends ReportWidgetBase
      */
     public function render()
     {
+        $this->addCss('/plugins/winter/googleanalytics/assets/css/placeholder.css', 'Winter.GoogleAnalytics');
+
+        return $this->makePartial('widget');
+    }
+
+    public function onLoad()
+    {
         try {
             $this->loadData();
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
         }
 
-        return $this->makePartial('widget');
+        return [
+            '#' . $this->alias => $this->makePartial('report')
+        ];
     }
 
     public function defineProperties()
@@ -60,12 +75,6 @@ class TrafficSources extends ReportWidgetBase
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$'
             ],
-            'number' => [
-                'title'             => 'winter.googleanalytics::lang.widgets.traffic_sources_number',
-                'default'           => '10',
-                'type'              => 'string',
-                'validationPattern' => '^[0-9]+$'
-            ],
             'displayDescription' => [
                 'title'             => 'winter.googleanalytics::lang.widgets.display_description',
                 'type'              => 'checkbox',
@@ -76,22 +85,46 @@ class TrafficSources extends ReportWidgetBase
 
     protected function loadData()
     {
-        $days = $this->property('days');
-        if (!$days)
-            throw new ApplicationException('Invalid days value: '.$days);
+        $analytics = Analytics::instance();
 
-        $obj = Analytics::instance();
-        $data = $obj->service->data_ga->get(
-            $obj->viewId,
-            $days.'daysAgo',
-            'today',
-            'ga:visits',
-            ['dimensions' => 'ga:source', 'sort' => '-ga:visits']
+        $days = $this->property('days', 30);
+
+        // Formulate data request
+        $request = new RunReportRequest();
+        $now = Argon::now()->toImmutable();
+        $request->setDimensions([
+            new Dimension(['name' => 'sessionMedium']),
+        ]);
+        $request->setMetrics([
+            new Metric(['name' => 'sessions']),
+        ]);
+        $request->setDateRanges([
+            new DateRange([
+                'startDate' => $now->subDays($days)->format('Y-m-d'),
+                'endDate' => $now->format('Y-m-d')
+            ])
+        ]);
+        $request->setOrderBys([
+            new OrderBy([
+                'desc' => true,
+                'metric' => new MetricOrderBy([
+                    'metricName' => 'sessions',
+                ])
+            ]),
+        ]);
+
+        $data = $analytics->service->properties->runReport(
+            $analytics->viewId,
+            $request,
         );
 
-        $rows = $data->getRows() ?: [];
-
-        $this->vars['rows'] = array_slice($rows, 0, $this->property('number'));
-        $this->vars['total'] = $data->getTotalsForAllResults()['ga:visits'];
+        $this->vars['rows'] = $data->getRows() ?: [];
+        $this->vars['mediumMap'] = [
+            'organic' => Lang::get('winter.googleanalytics::lang.mediums.organic'),
+            'cpc' => Lang::get('winter.googleanalytics::lang.mediums.cpc'),
+            '(none)' => Lang::get('winter.googleanalytics::lang.mediums.direct'),
+            'referral' => Lang::get('winter.googleanalytics::lang.mediums.referral'),
+            '(not set)' => Lang::get('winter.googleanalytics::lang.mediums.unknown'),
+        ];
     }
 }
