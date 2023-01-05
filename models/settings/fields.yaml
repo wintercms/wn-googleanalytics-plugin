@@ -26,16 +26,15 @@ tabs:
             label: winter.googleanalytics::lang.settings.domain_name
             commentAbove: winter.googleanalytics::lang.settings.domain_name_comment
 
-        anonymize_ip:
-            tab: winter.googleanalytics::lang.strings.tracking
-            type: switch
+        measurement_id:
+            tab: winter.googleanalytics::lang.strings.measurement
             span: left
-            label: winter.googleanalytics::lang.settings.anonymize_ip
-            commentAbove: winter.googleanalytics::lang.settings.anonymize_ip_comment
+            label: winter.googleanalytics::lang.settings.measurement_id
+            commentAbove: winter.googleanalytics::lang.settings.measurement_id_comment
 
-        force_ssl:
-            tab: winter.googleanalytics::lang.strings.tracking
-            type: switch
-            span: left
-            label: winter.googleanalytics::lang.settings.force_ssl
-            commentAbove: winter.googleanalytics::lang.settings.force_ssl_comment
+        measurement_secret:
+            tab: winter.googleanalytics::lang.strings.measurement
+            span: right
+            label: winter.googleanalytics::lang.settings.measurement_secret
+            type: sensitive
+            commentAbove: winter.googleanalytics::lang.settings.measurement_secret_comment
