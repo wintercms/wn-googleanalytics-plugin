@@ -2,7 +2,7 @@
     <h3><?= e($this->property('title')) ?></h3>
 
     <img
-        src="<?= Url::to('plugins/winter/googleanalytics/assets/images/bar-graph-placeholder.svg') ?>"
+        src="<?= Url::asset('plugins/winter/googleanalytics/assets/images/bar-graph-placeholder.svg') ?>"
         class="placeholder"
         style="width: 100%; height: 340px"
         onload="$.request('<?= $this->alias ?>::onLoad');"
