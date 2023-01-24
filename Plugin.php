@@ -1,10 +1,11 @@
 <?php namespace Winter\GoogleAnalytics;
 
+use Backend\Models\UserRole;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
 {
-    public function pluginDetails()
+    public function pluginDetails(): array
     {
         return [
             'name'        => 'Google Analytics',
@@ -16,51 +17,53 @@ class Plugin extends PluginBase
         ];
     }
 
-    public function registerComponents()
+    public function registerComponents(): array
     {
         return [
-            '\Winter\GoogleAnalytics\Components\Tracker' => 'googleTracker'
+            \Winter\GoogleAnalytics\Components\Tracker::class => 'googleTracker'
         ];
     }
 
-    public function registerPermissions()
+    public function registerPermissions(): array
     {
         return [
             'winter.googleanalytics.access_settings' => [
                 'tab'   => 'winter.googleanalytics::lang.permissions.tab',
-                'label' => 'winter.googleanalytics::lang.permissions.settings'
+                'label' => 'winter.googleanalytics::lang.permissions.settings',
+                'roles' => [UserRole::CODE_DEVELOPER],
             ],
             'winter.googleanalytics.view_widgets' => [
                 'tab'   => 'winter.googleanalytics::lang.permissions.tab',
-                'label' => 'winter.googleanalytics::lang.permissions.widgets'
+                'label' => 'winter.googleanalytics::lang.permissions.widgets',
+                'roles' => [UserRole::CODE_DEVELOPER, UserRole::CODE_PUBLISHER],
             ]
         ];
     }
 
-    public function registerReportWidgets()
+    public function registerReportWidgets(): array
     {
         return [
-            'Winter\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
+            \Winter\GoogleAnalytics\ReportWidgets\TrafficOverview::class => [
                 'label'       => 'Google Analytics traffic overview',
                 'context'     => 'dashboard',
                 'permissions' => ['winter.googleanalytics.view_widgets']
             ],
-            'Winter\GoogleAnalytics\ReportWidgets\TrafficSources' => [
+            \Winter\GoogleAnalytics\ReportWidgets\TrafficSources::class => [
                 'label'       => 'Google Analytics traffic sources',
                 'context'     => 'dashboard',
                 'permissions' => ['winter.googleanalytics.view_widgets']
             ],
-            'Winter\GoogleAnalytics\ReportWidgets\Browsers' => [
+            \Winter\GoogleAnalytics\ReportWidgets\Browsers::class => [
                 'label'       => 'Google Analytics browsers',
                 'context'     => 'dashboard',
                 'permissions' => ['winter.googleanalytics.view_widgets']
             ],
-            'Winter\GoogleAnalytics\ReportWidgets\TrafficGoal' => [
+            \Winter\GoogleAnalytics\ReportWidgets\TrafficGoal::class => [
                 'label'       => 'Google Analytics traffic goal',
                 'context'     => 'dashboard',
                 'permissions' => ['winter.googleanalytics.view_widgets']
             ],
-            'Winter\GoogleAnalytics\ReportWidgets\TopPages' => [
+            \Winter\GoogleAnalytics\ReportWidgets\TopPages::class => [
                 'label'       => 'Google Analytics top pages',
                 'context'     => 'dashboard',
                 'permissions' => ['winter.googleanalytics.view_widgets']
@@ -68,7 +71,7 @@ class Plugin extends PluginBase
         ];
     }
 
-    public function registerSettings()
+    public function registerSettings(): array
     {
         return [
             'config' => [
@@ -80,31 +83,5 @@ class Plugin extends PluginBase
                 'order'       => 600
             ]
         ];
-    }
-
-    public function registerClassAliases()
-    {
-        /**
-         * To allow compatibility with plugins that extend the original RainLab.GoogleAnalytics plugin,
-         * this will alias those classes to use the new Winter.GoogleAnalytics classes.
-         */
-        return [
-            \Winter\GoogleAnalytics\Plugin::class                        => \RainLab\GoogleAnalytics\Plugin::class,
-            \Winter\GoogleAnalytics\Classes\CacheItem::class             => \RainLab\GoogleAnalytics\Classes\CacheItem::class,
-            \Winter\GoogleAnalytics\Classes\CacheItemPool::class         => \RainLab\GoogleAnalytics\Classes\CacheItemPool::class,
-            \Winter\GoogleAnalytics\Classes\Analytics::class             => \RainLab\GoogleAnalytics\Classes\Analytics::class,
-            \Winter\GoogleAnalytics\Components\Tracker::class            => \RainLab\GoogleAnalytics\Components\Tracker::class,
-            \Winter\GoogleAnalytics\Models\Settings::class               => \RainLab\GoogleAnalytics\Models\Settings::class,
-            \Winter\GoogleAnalytics\ReportWidgets\TrafficGoal::class     => \RainLab\GoogleAnalytics\ReportWidgets\TrafficGoal::class,
-            \Winter\GoogleAnalytics\ReportWidgets\TopPages::class        => \RainLab\GoogleAnalytics\ReportWidgets\TopPages::class,
-            \Winter\GoogleAnalytics\ReportWidgets\TrafficOverview::class => \RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview::class,
-            \Winter\GoogleAnalytics\ReportWidgets\Browsers::class        => \RainLab\GoogleAnalytics\ReportWidgets\Browsers::class,
-            \Winter\GoogleAnalytics\ReportWidgets\TrafficSources::class  => \RainLab\GoogleAnalytics\ReportWidgets\TrafficSources::class,
-        ];
-    }
-
-    public function boot()
-    {
-        set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__.'/vendor/google/apiclient/src');
     }
 }
