@@ -55,7 +55,7 @@ return [
         'project_name'         => 'Google API Project name',
         'client_id'            => 'Google API Client ID',
         'app_email'            => 'Email address',
-        'profile_id'           => 'Analytics View/Profile ID number',
+        'profile_id'           => 'Analytics Property ID number',
         'gapi_key'             => 'Private key',
         'tracking_id'          => 'Tracking ID',
         'anonymize_ip'         => 'Anonymize IP',
