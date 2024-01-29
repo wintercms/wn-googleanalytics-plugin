@@ -50,11 +50,11 @@ In either case, you should end up on the **Credentials** page and can create you
 
 1. Open your Winter CMS back-end administration area and open **Settings > Google Analytics**.
 
-1. *Paste the Account ID from the clipboard* in to the field **Analytics View/Profile ID number**.
+1. *Paste the Property ID from the clipboard* in to the field **Analytics Property ID number**.
 
 1. Upload the previously downloaded `.json` private key file to the **Private key** field.
 
-1. Specify the **Tracking ID** (eg `UA-12312312-3`) and **Domain name** values if you are going to use the plugin's built-in tracking component. To find this code, select **Admin > Property > Property Settings** from the Google Analytics menu.
+1. Specify the **Tracking ID** (eg `G-1234ABCDEF`) and **Domain name** values if you are going to use the plugin's built-in tracking component. To find this code, select **Admin > Property > Property Settings** from the Google Analytics menu.
 
 1. If Tracking is not working initially, enter the value `auto` for the **Domain name** field. This is a fix for newborn Google Analytics accounts.
 
