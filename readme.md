@@ -1,8 +1,30 @@
-# Google Analytics V4 integration plugin
+# Google Analytics V4 Integration Plugin
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wintercms/wn-googleanalytics-plugin/blob/main/LICENSE)
 
 This plugin adds Google Analytics tracking and reporting features to the [Winter CMS](https://wintercms.com).
 
 > **Note**: The v3.x series of this plugin only supports Google Analytics v4 (GA4) as GA3 / UA [are being retired](https://support.google.com/analytics/answer/11583528?hl=en). If you wish to use this plugin for GA3 / UA, you must roll back to v2.0.2 of this plugin.
+
+Supports:
+- Multiple backend dashboard report widgets for GA4 data
+- Frontend component to enable reporting analytics data to GA4
+- Anonymize IP addresses
+- Block tracking of authenticated backend users
+- Block tracking while in maintenance mode
+
+## Installation
+
+This plugin is available for installation via [Composer](http://getcomposer.org/).
+
+```bash
+composer require winter/wn-googleanalytics-plugin
+```
+
+After installing the plugin you will need to run the migrations and (if you are using a [public folder](https://wintercms.com/docs/develop/docs/setup/configuration#using-a-public-folder)) [republish your public directory](https://wintercms.com/docs/develop/docs/console/setup-maintenance#mirror-public-files).
+
+```bash
+php artisan migrate
+```
 
 ## Configuration
 
