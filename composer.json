@@ -32,12 +32,18 @@
         "psr/cache": "^1.0",
         "composer/installers": "~1.0",
         "guzzlehttp/guzzle": "~6.0|~7.0",
-        "google/apiclient": "^2.4"
+        "google/apiclient": "^2.4",
+        "luketowers/laravel-ga4-event-tracking": "^2.1"
     },
     "replace": {
         "rainlab/googleanalytics-plugin": "~1.2"
     },
     "extra": {
         "installer-name": "googleanalytics"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
 }
