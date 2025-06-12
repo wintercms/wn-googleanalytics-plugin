@@ -91,6 +91,99 @@ To add the plugin's tracking code to your website just drop the Google Analytics
 {% component 'googleTracker' %}
 ```
 
+## Server-Side Tracking
+
+This plugin supports server-side tracking via the Google Analytics 4 Measurement Protocol API. This allows your Winter CMS server to send data directly to Google Analytics for critical events without requiring the browser to render a client with a tracking script.
+
+### Setting Up Server-Side Tracking
+
+To enable server-side tracking, follow these steps:
+
+#### 1. Create a GA4 Property
+
+1. From your Google Analytics admin, create a property and choose GA4
+2. Set your timezone and currency preferences
+3. When the property is created, create a web data stream pointing to the URL where your Winter CMS is served
+4. You'll receive a measurement ID with a 'G-' prefix (e.g., G-JHC14NA60X) - note this value as you'll need it for the `GA4_MEASUREMENT_ID` environment variable
+
+#### 2. Get Your Measurement Protocol API Secret
+
+1. In your Google Analytics admin, go to the web data stream you just created
+2. Scroll down and click on "Measurement Protocol API secrets"
+3. Click "Create" to generate a secret
+4. Note this secret and do not expose it publicly - it will be set as the `GA4_MEASUREMENT_PROTOCOL_API_SECRET` environment variable
+
+#### 3. Configure Environment Variables
+
+Add the following to your Winter CMS `.env` file:
+
+```
+GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+GA4_MEASUREMENT_PROTOCOL_API_SECRET=XXXXXXXXXX
+```
+
+#### 4. Enable the Plugin in Winter CMS
+
+1. Login to the Winter CMS backend and go to Settings → Google Analytics
+2. Connect your GA4 account with your Winter CMS instance:
+   - Upload your private key (from Google console's IAM & Admin > Service accounts)
+   - Set your Analytics Property ID number
+   - Set your tracking ID (the G-prefixed value, same as your `GA4_MEASUREMENT_ID`)
+   - Set domain name (usually "auto")
+   - Save the settings
+
+### Using Server-Side Tracking
+
+#### In PHP Code
+
+You can send events to Google Analytics from your PHP code using the `MeasurementProtocolService` instance:
+
+```php
+use Winter\GoogleAnalytics\Classes\MeasurementProtocolService;
+use App;
+
+// Get the service instance from the container
+$service = App::make(MeasurementProtocolService::class);
+
+// Basic event
+$service->sendEvent('button_click');
+
+// Event with parameters
+$service->sendEvent('purchase', [
+    'currency' => 'USD',
+    'value' => 99.99,
+    'transaction_id' => 'T12345',
+]);
+
+// Event with custom client ID
+$service->sendEvent('login', [
+    'method' => 'email',
+], 'user123');
+```
+
+Alternatively, you can use dependency injection to get the service instance:
+
+```php
+use Winter\GoogleAnalytics\Classes\MeasurementProtocolService;
+
+class MyController
+{
+    protected $analyticsService;
+
+    public function __construct(MeasurementProtocolService $service)
+    {
+        $this->analyticsService = $service;
+    }
+
+    public function myMethod()
+    {
+        $this->analyticsService->sendEvent('button_click');
+    }
+}
+```
+
+The `client_id` parameter is important for user identification in Google Analytics. If not provided, it will be read from the session or generated automatically to ensure consistent tracking.
+
 ## Troubleshooting
 
 ### Fix for Windows / XAMPP

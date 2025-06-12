@@ -1,7 +1,9 @@
 <?php namespace Winter\GoogleAnalytics;
 
+use App;
 use Backend\Models\UserRole;
 use System\Classes\PluginBase;
+use Winter\GoogleAnalytics\Classes\MeasurementProtocolService;
 
 class Plugin extends PluginBase
 {
@@ -83,5 +85,10 @@ class Plugin extends PluginBase
                 'order'       => 600
             ]
         ];
+    }
+
+    public function register()
+    {
+        App::singleton(MeasurementProtocolService::class);
     }
 }
