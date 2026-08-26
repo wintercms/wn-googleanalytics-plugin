@@ -21,3 +21,4 @@
 "2.0.2": "allow guzzle dependency 7.0+"
 "3.0.0": "!!! This plugin now only supports Google Analytics v4"
 "3.1.0": "Added support for configuring the plugin via a config file."
+"3.1.1": "Updated the readme with an installation guide and a feature list."
