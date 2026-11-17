@@ -37,7 +37,7 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function getItem($key)
+    public function getItem(string $key): CacheItemInterface
     {
         $this->validateKey($key);
 
@@ -52,7 +52,7 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function getItems(array $keys = array())
+    public function getItems(array $keys = array()): iterable
     {
         return array_combine($keys, array_map(function ($key) {
             return $this->getItem($key);
@@ -62,7 +62,7 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function hasItem($key)
+    public function hasItem(string $key): bool
     {
         $this->validateKey($key);
 
@@ -72,7 +72,7 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function clear()
+    public function clear(): bool
     {
         try {
             /* @var \Illuminate\Contracts\Cache\Store $store */
@@ -89,7 +89,7 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteItem($key)
+    public function deleteItem(string $key): bool
     {
         $this->validateKey($key);
 
@@ -99,7 +99,7 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteItems(array $keys)
+    public function deleteItems(array $keys): bool
     {
         // Validating all keys first.
         foreach ($keys as $key) {
@@ -118,20 +118,20 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function save(CacheItemInterface $item)
+    public function save(CacheItemInterface $item): bool
     {
-        $expiresInMinutes = null;
+        $expiresInSeconds = null;
 
         if ($item instanceof CacheItem) {
-            $expiresInMinutes = $item->getTTL();
+            $expiresInSeconds = $item->getTTL();
         }
 
         try {
-            if (is_null($expiresInMinutes)) {
+            if (is_null($expiresInSeconds)) {
                 $this->repository->forever($item->getKey(), serialize($item->get()));
             }
             else {
-                $this->repository->put($item->getKey(), serialize($item->get()), $expiresInMinutes);
+                $this->repository->put($item->getKey(), serialize($item->get()), $expiresInSeconds);
             }
         }
         catch (Exception $exception) {
@@ -144,7 +144,7 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(CacheItemInterface $item)
+    public function saveDeferred(CacheItemInterface $item): bool
     {
         $this->deferred[] = $item;
 
@@ -154,7 +154,7 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function commit()
+    public function commit(): bool
     {
         $success = true;
 
