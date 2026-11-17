@@ -95,22 +95,24 @@ class CacheItem implements CacheItemInterface
 
     /**
      * @return int|null
-     *   The amount of minutes this item should stay alive. Or null when no expires is given.
+     *   The amount of seconds this item should stay alive. Or null when no expires is given.
      */
-    public function getTTL()
+    public function getTTL(): ?int
     {
         if (is_int($this->expires)) {
-            return floor($this->expires / 60.0);
+            return max(0, $this->expires);
         }
 
         if ($this->expires instanceof DateTimeInterface) {
-            $diff = (new DateTime())->diff($this->expires);
-
-            return boolval($diff->invert) ? 0 : $diff->i;
+            return max(0, $this->expires->getTimestamp() - time());
         }
 
         if ($this->expires instanceof DateInterval) {
-            return boolval($this->expires->invert) ? 0 : $this->expires->i;
+            $now = new DateTime();
+
+            return max(0, (clone $now)->add($this->expires)->getTimestamp() - $now->getTimestamp());
         }
+
+        return null;
     }
 }

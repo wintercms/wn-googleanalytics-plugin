@@ -120,18 +120,18 @@ class CacheItemPool implements CacheItemPoolInterface
      */
     public function save(CacheItemInterface $item): bool
     {
-        $expiresInMinutes = null;
+        $expiresInSeconds = null;
 
         if ($item instanceof CacheItem) {
-            $expiresInMinutes = $item->getTTL();
+            $expiresInSeconds = $item->getTTL();
         }
 
         try {
-            if (is_null($expiresInMinutes)) {
+            if (is_null($expiresInSeconds)) {
                 $this->repository->forever($item->getKey(), serialize($item->get()));
             }
             else {
-                $this->repository->put($item->getKey(), serialize($item->get()), $expiresInMinutes);
+                $this->repository->put($item->getKey(), serialize($item->get()), $expiresInSeconds);
             }
         }
         catch (Exception $exception) {
